@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    ports:
+      - "3000:3000"         # maps port 3000
+    container_name: node    # naming the container "node"
+    restart: always         # restarting if it stops
+    volumes:
+      - app-data:/var/lib/app-data       # Mounting the app-data volume to /var/lib/app-data in the container
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile2
+    ports:
+      - "8081:8080"         # maps port 8081
+    container_name: nginx   # naming the container "nginx"
+    restart: always         # restarting if it stops
+    depends_on:
+      - app                 # it waits for app to start
+    volumes:
+      - app-data:/var/lib/nginx-data     # Mounting the app-data volume to /var/lib/nginx-data in the container
+
+volumes:
+  app-data:
+    driver: local           # Using the local driver to create the volume
