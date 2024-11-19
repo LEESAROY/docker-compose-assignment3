@@ -30,7 +30,7 @@ docker images
 # checked the docker running containers
 docker ps 
 
-# go to the browser and paste below url, It will show the message from react app in 8080 port
+# go to the browser and paste below url, It will access the web service through nginx load balancer
 http://localhost:8081/
 
 # Used below command to stop the containers
